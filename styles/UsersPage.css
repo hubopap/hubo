@@ -1,0 +1,119 @@
+/* .users-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  
+  .user {
+    display: inline-block;
+    width: 120px;
+    height: 60px;
+    margin: 10px;
+    background-color: white;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 60px;
+    color: #000;
+    border-radius: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* prevent line breaks 
+  } 
+  */
+
+  .users-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* center container */
+    width: 60%;
+    margin: 0 auto;
+  }
+  
+  .user {
+    padding-left: 3px;
+    padding-right: 3px;
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 60px;
+    margin: 10px;
+    background-color: white;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 60px;
+    color: #000;
+    border-radius: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* prevent line breaks */
+  }
+  
+  /* margin-left: auto for last child in each row */
+  .user:nth-child(n+5):nth-child(-n+8),
+  .user:nth-child(n+9):nth-child(-n+12),
+  .user:nth-child(n+13):nth-child(-n+16),
+  .user:nth-child(n+17):nth-child(-n+20),
+  .user:nth-child(n+21):nth-child(-n+24),
+  .user:nth-child(n+25):nth-child(-n+28),
+  .user:nth-child(n+29):nth-child(-n+32),
+  .user:nth-child(n+33):nth-child(-n+36),
+  .user:nth-child(n+37):nth-child(-n+40) {
+    margin: 0 auto;
+  }
+
+  .user:hover {
+    border-color: #285E89;
+    color: #285E89;
+    cursor: pointer; /* Change cursor to hand icon */
+    user-select: none; /* Prevent text inside element from being selected */
+  }
+  
+  /* Optional: Add a tooltip to display the full username next to the mouse */
+  .user:hover:after {
+    content: attr(title);
+    position: absolute;
+    top: calc(100% + 5px);
+    left: calc(50% - 50px);
+    width: 100px;
+    padding: 5px;
+    background-color: #285E89;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 5px;
+    white-space: nowrap;
+  }
+  
+  .search-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .search-box input[type="text"] {
+    border-radius: 20px;
+    border: 1px solid #285E89;
+    padding: 10px 20px;
+    outline: none;
+    width: 20%;
+  }
+
+  .user:hover::before {
+    content: attr(data-username);
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  .user:after {
+    content: attr(data-tooltip);
+    display: none;
+  }

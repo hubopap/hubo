@@ -1,0 +1,134 @@
+.container_groups {
+  width: 300px;
+  height: 100px;
+  background-color: #fff;
+  border: none;
+  margin-right: 10px; 
+  float: left;
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container_groups p {
+  margin-bottom: 5px;
+}
+
+.name_group, .desc_group {
+  color: #000;
+}
+
+.name_group {
+  padding: 8px 10px 0 10px;
+  font-weight: 900;
+  font-size: 20px;
+  max-width: 100%; /* adjust the width to show one line */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* prevent line breaks */
+}
+
+.desc_group {
+  padding: 0 10px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  width: 100%;
+  max-height: 3.5em; /* adjust the height to show three lines */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+  
+
+.modal_groups {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff; 
+  width: 350px; 
+  height: 225px; 
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal_groups input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+.group_textarea{
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+.modal_groups button {
+  display: block;
+  margin-top: 10px;
+  background-color: #285E89;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin: 0 auto;
+  display: block;
+}
+
+.button_groups {
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #285E89;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.button_cgroups{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: block;
+  margin: 20px auto 0;
+  height: 40px;
+  width: 40px;
+  font-size: 16px;
+  background-color: #285E89;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.buttons_container {
+  display: flex;
+  margin-top: 15px;
+}
+
+.group_textarea{
+  resize: none;
+  width: 100%;
+}
+
+*{
+  font-family: Rubik;
+}
+
+
+
