@@ -13,7 +13,7 @@
 //     async function fetchData() {
 //       try {
 //         const token = getToken();
-//         const { data } = await axios.get('http://hubo.pt:3001/users', {
+//         const { data } = await axios.get('https://hubo.pt:3001/users', {
 //           headers: {
 //             Authorization: `Bearer ${token}`,
 //           },
@@ -57,7 +57,7 @@ export default function Users() {
     async function fetchData() {
       try {
         const token = getToken();
-        const { data } = await axios.get('http://hubo.pt:3001/users', {
+        const { data } = await axios.get('https://hubo.pt:3001/users', {
           headers: {
             Authorization: `Bearer ${token}`,
           },

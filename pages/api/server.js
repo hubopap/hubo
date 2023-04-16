@@ -44,7 +44,7 @@ sequelize.sync().then(() => {
 //Configurações do express e do servidor da API
 const app = express();
 app.listen(3001, () => {
-    console.log('api iniciada em http://hubo.pt:3001');
+    console.log('api iniciada em https://hubo.pt:3001');
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
