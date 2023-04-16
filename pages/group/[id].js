@@ -45,7 +45,7 @@ const isUserInGroup = async () => {
   try {
     const user_data = await getData();
     const token = await getToken();
-    const nongroup = await axios.post('https://hubo.pt:3001/non_group_users', {
+    const nongroup = await axios.post('http://hubo.pt:3001/non_group_users', {
       id_group: group.id_group
     }, {
       headers: { Authorization: `Bearer ${token}` },
@@ -75,7 +75,7 @@ const handleCreateTask = async (e) => {
   }else{
     try {
       const token = await getToken();
-      await axios.post('https://hubo.pt:3001/create_task', {
+      await axios.post('http://hubo.pt:3001/create_task', {
         id_group: group.id_group,
         deadline_task: deadline_create,
         assigned_user: assignedUser,
@@ -123,7 +123,7 @@ const handleEditTask = async (e) => {
   try {
     const token = await getToken();
     await axios.post(
-      'https://hubo.pt:3001/update_task_info',
+      'http://hubo.pt:3001/update_task_info',
       {
         id_task: selectedTask.task.id_task,
         deadline_task: editDeadline,
@@ -145,7 +145,7 @@ const handleEditTask = async (e) => {
 const setAsdoneTask = async ( selectedtask ) => {
   try {
     const token = await getToken();
-    const response = await axios.post('https://hubo.pt:3001/update_task_state', {
+    const response = await axios.post('http://hubo.pt:3001/update_task_state', {
       id_task: selectedTask.task.id_task,
       state_task: 2,
     },
@@ -164,7 +164,7 @@ const setAsdoneTask = async ( selectedtask ) => {
 const deleteTask = async ( selectedtask ) => {
   try {
     const token = await getToken();
-    const response = await axios.post('https://hubo.pt:3001/update_task_state', {
+    const response = await axios.post('http://hubo.pt:3001/update_task_state', {
       id_task: selectedTask.task.id_task,
       state_task: 4,
     },
@@ -271,7 +271,7 @@ const addUserToGroup = async (user) => {
       throw new Error('No user selected.');
     }
     await axios.post(
-      'https://hubo.pt:3001/add_user_to_group',
+      'http://hubo.pt:3001/add_user_to_group',
       {
         user_to_add: user.id_user,
         group_id: group.id_group,
@@ -292,7 +292,7 @@ const addUserToGroup = async (user) => {
   const fetchNonGroupUsers = async () => {
     try {
       const token = await getToken();
-      const response = await axios.post('https://hubo.pt:3001/non_group_users', {
+      const response = await axios.post('http://hubo.pt:3001/non_group_users', {
         id_group: group.id_group
       }, {
         headers: { Authorization: `Bearer ${token}` },
@@ -307,7 +307,7 @@ const addUserToGroup = async (user) => {
   const fetchGroupUsers = async () => {
     try {
       const token = await getToken();
-      const response = await axios.post('https://hubo.pt:3001/group_users', {
+      const response = await axios.post('http://hubo.pt:3001/group_users', {
       id_group: group.id_group
       }, {
         headers: { Authorization: `Bearer ${token}` },
@@ -332,7 +332,7 @@ const addUserToGroup = async (user) => {
 useEffect(() => {
   const fetchTasksByGroup = async () => {
     try {
-      const res = await fetch("https://hubo.pt:3001/tasks_by_group", {
+      const res = await fetch("http://hubo.pt:3001/tasks_by_group", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -390,7 +390,7 @@ function FileUploader() {
       const formData = new FormData();
       formData.append('file', file, fileName);
       const response = await instance_file.post(
-        `https://hubo.pt:3001/upload_file?id_group=${group.id_group}`,
+        `http://hubo.pt:3001/upload_file?id_group=${group.id_group}`,
         formData,
         {
           headers: {
@@ -423,7 +423,7 @@ const handleFilesListPopUp = async () => {
   setFilesList(true);
 
   try {
-    const response = await axios.post("https://hubo.pt:3001/files_list", { id_group: group.id_group }, {
+    const response = await axios.post("http://hubo.pt:3001/files_list", { id_group: group.id_group }, {
       
       headers: {
         "Content-Type": "application/json",
@@ -452,7 +452,7 @@ const handleDelete = async (fileName) => {
 
   try {
     const response = await instance_delete.post(
-      'https://hubo.pt:3001/delete_file',
+      'http://hubo.pt:3001/delete_file',
       {
         id_group: group.id_group,
         file_name: fileName
@@ -460,7 +460,7 @@ const handleDelete = async (fileName) => {
     );
     alert("File successfully deleted!")
     try {
-      const response = await axios.post("https://hubo.pt:3001/files_list", { id_group: group.id_group }, {
+      const response = await axios.post("http://hubo.pt:3001/files_list", { id_group: group.id_group }, {
         
         headers: {
           "Content-Type": "application/json",
@@ -486,7 +486,7 @@ function FileList({ files }) {
         <div>
           {files.map((file) => (
             <li style={{ listStyle: 'none' , margintop : "20px"  }} key={file.name}>
-              <a  style={{ marginRight : "8px" }}href={`https://hubo.pt:3001/download_file?id_group=${group.id_group}&file_name=${file.name}`}>
+              <a  style={{ marginRight : "8px" }}href={`http://hubo.pt:3001/download_file?id_group=${group.id_group}&file_name=${file.name}`}>
                 {file.name}
               </a>
               <a style={{ cursor: "pointer", color: "red"}} onClick={() => handleDelete(file.name)}>Erase</a>
@@ -729,7 +729,7 @@ export async function getServerSideProps({ params, req }) {
   const token = await getToken(); 
 
   try {
-    const response = await axios.get(`https://hubo.pt:3001/group/${id}`, {
+    const response = await axios.get(`http://hubo.pt:3001/group/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return { props: { group: response.data } };

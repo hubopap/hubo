@@ -24,7 +24,7 @@ export default function UserProfile() {
 
     async function fetchData() {
       try {
-        const { data } = await axios.get(`https://hubo.pt:3001/user/${username}`, {
+        const { data } = await axios.get(`http://hubo.pt:3001/user/${username}`, {
         });
         setUser(data);
         console.log(data);
