@@ -26,7 +26,7 @@ export default function MyGroups(){
           }else{
             setUserData(data);
             const token = localStorage.getItem("token");
-            const { data: groupsData } = await axios.get('http://129.151.255.136:3001/groups_by_user', {
+            const { data: groupsData } = await axios.get('https://hubo.pt:3001/groups_by_user', {
               headers: { Authorization: `Bearer ${token}` }
             });
             setGroups(groupsData);
@@ -49,7 +49,7 @@ export default function MyGroups(){
     }else{
 
     const token = localStorage.getItem("token");
-    const { data } = await axios.post('http://129.151.255.136:3001/create_group', {
+    const { data } = await axios.post('https://hubo.pt:3001/create_group', {
       name_group: name_group,
       desc_group: desc_group
     }, {

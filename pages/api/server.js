@@ -1,4 +1,6 @@
 const express = require("express");
+const https = require("https");
+const fs = require("fs");
 const Sequelize = require('sequelize');
 const { DataTypes,  Op } = require('sequelize');
 const sequelize = require('./db');
@@ -9,7 +11,6 @@ const jwt = require("jsonwebtoken");
 const User = require('./models/user');
 const Group = require('./models/group');
 const Task = require('./models/task');
-const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 
@@ -43,9 +44,19 @@ sequelize.sync().then(() => {
 
 //Configurações do express e do servidor da API
 const app = express();
-app.listen(3001, () => {
-    console.log('api iniciada em http://hubo.pt:3001');
+app.use(cors());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+const options = {
+    key: fs.readFileSync('/etc/letsencrypt/live/hubo.pt/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/hubo.pt/fullchain.pem')
+};
+
+https.createServer(options, app).listen(3001, () => {
+    console.log('api iniciada em https://hubo.pt:3001');
 });
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
