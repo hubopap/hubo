@@ -42,7 +42,7 @@ export default function Profile() {
   async function handleSaveBioChange(event) {
     event.preventDefault();
     try {
-      const response = await fetch("http://hubo.pt:3001/update_bio", {
+      const response = await fetch("http://129.151.255.136:3001/update_bio", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
