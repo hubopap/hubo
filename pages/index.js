@@ -29,7 +29,7 @@ const Index = () => (
 
         <div className="box">
             <h3>Create several circles of people</h3>
-            <p>With the creation of unlimited groups you can get together and create various work circle.</p>
+            <p>With the creation of unlimited groups you can get together and create various work circles.</p>
             <Link href="/register" className="btn"> Start Now <span className=""></span></Link>
         </div>
 
@@ -53,7 +53,7 @@ const Index = () => (
 
         <div className="content">
           <h3>Get our Mobile App</h3>
-          <p>We recomend use the Mobile App to have the best of both worlds</p>
+          <p>We recomend using the Mobile App to have the best of both worlds</p>
         </div>
 
       </section>
