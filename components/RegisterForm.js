@@ -26,11 +26,18 @@ const handleSubmit = async event => {
   } else if (password.length < 8 || password.length > 20) {
     setErrorMessage("Password must have between 8 and 20 characters");
   } else {
-    await RegisterUser(username, email, password);
-    router.push({
-      pathname: '/login',
+    await RegisterUser(username, email, password).then((res) => {
+      router.push({
+        pathname: '/login',
+      });
+    }).catch((error) => {
+      if(error.response.status == 400) {
+        setErrorMessage("Username already in use.");
+      }else{
+        setErrorMessage("An error ocurred, try again later.");
+      }
     });
-  }
+  } 
 };
 
 const togglePassword = () => {
