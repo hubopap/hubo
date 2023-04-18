@@ -34,7 +34,7 @@ export default function Group({ group }) {
   const [files, setFiles] = useState([]);
   const [id_group, setIdGroup] = useState(null);
   const [groupInfo, setGroupInfo] = useState(false);
-
+  const [userData, setUserData] = useState([]);
 
 //proteção da route
 useEffect(() => {
