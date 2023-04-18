@@ -17,7 +17,8 @@ export default function Profile() {
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await getData();
+      const { data } = await getData(); //otenção dos dados do utilizador atraves da função getData
+                                        // e caso não esteja atenticado redireciona o utilizador para o index
       if (data.loggedIn == false) {
         router.push("/");
       } else {

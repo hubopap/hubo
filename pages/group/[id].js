@@ -4,7 +4,6 @@ import axios from 'axios'; //importação do axios para fazer requests à API
 import { getToken } from '@/lib/auth'; //importação da função getToken para receber o token do utilizador
 import { useState, useEffect } from 'react';   // importação do useState que é usado apra gerir o estado dos componentes e o useEffect que permite executar efeitos colaterais em componentes
 import { getData } from '@/lib/auth';
-import { TrashOutline } from 'ionicons/icons';
 import moment from 'moment';
 
 //função grupo que contem todas as funções da página grupo
@@ -36,6 +35,23 @@ export default function Group({ group }) {
   const [id_group, setIdGroup] = useState(null);
   const [groupInfo, setGroupInfo] = useState(false);
 
+
+//proteção da route
+useEffect(() => {
+  async function fetchData() {
+    const { data } = await getData(); //otenção dos dados do utilizador atraves da função getData
+                                      // e caso não esteja atenticado redireciona o utilizador para o index
+    if (data.loggedIn == false) {
+      router.push("/");
+    } else {
+      setUserData(data);
+    }
+  }
+  fetchData().catch((error) => {
+    router.push("/");
+  });
+}, []);
+//
 //criar tarefa
 const handleCreateTaskPopUp = () => {
   setCreateTaskOpen(true);
@@ -266,12 +282,12 @@ const handleAddUserPopUp = () => {
 
 const addUserToGroup = async (user) => {
   try {
-    const token = await getToken();
+    const token = await getToken();    //obter o token do utilizador para fazer o request 
     if (!user || !user.id_user) {
       throw new Error('No user selected.');
     }
     await axios.post(
-      'https://hubo.pt:3001/add_user_to_group',
+      'https://hubo.pt:3001/add_user_to_group', //request a api do utilizador que ira ser adicionado
       {
         user_to_add: user.id_user,
         group_id: group.id_group,
@@ -281,7 +297,7 @@ const addUserToGroup = async (user) => {
       }
     );
     fetchNonGroupUsers();
-    setSelectedUser(null);
+    setSelectedUser(null);  //declaração do utilizador a adicionar para null para que seja possivel adicionar outro utilizador novamente
     window.location.reload();
   } catch (error) {
     console.error(error);
@@ -368,17 +384,17 @@ function FileUploader() {
   const [fileName, setFileName] = useState('');
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-    setFileName(e.target.files[0].name);
+    setFile(e.target.files[0]);                           //atribuição do ficheiro a adicionar 
+    setFileName(e.target.files[0].name);                  //atribuição do nome do ficheiro a adicionar 
     console.log(file);
     console.log(fileName);
   };
 
   const handleUpload = async () => {
-    const instance_file = axios.create();
+    const instance_file = axios.create();                   
     instance_file.interceptors.request.use(
         async (config) => {
-            const token = await localStorage.getItem('token'); 
+            const token = await localStorage.getItem('token');  //obtenção do token do utilizador para fazer o request 
             if (token) {
                 config.headers.authorization = `Bearer ${token}`; 
             }
@@ -387,10 +403,10 @@ function FileUploader() {
         (error) => Promise.reject(error)
     );
     try {
-      const formData = new FormData();
-      formData.append('file', file, fileName);
+      const formData = new FormData();                                                    //cria o objeto do ficheiro
+      formData.append('file', file, fileName);                                            //adiciona o ficheiro dentro do objeto
       const response = await instance_file.post(
-        `https://hubo.pt:3001/upload_file?id_group=${group.id_group}`,
+        `https://hubo.pt:3001/upload_file?id_group=${group.id_group}`,       //request a api para fazer o upload do ficheiro com base no id do grupo
         formData,
         {
           headers: {
@@ -398,9 +414,9 @@ function FileUploader() {
           },
         }
       );
-      setFile(null);
+      setFile(null); // atribuição da variavel para nula após o upload para que sejam adicionados novos ficheiros
       setFileName('');
-      alert('File added successfully!');
+      alert('File added successfully!'); // mensagem de alerta no front-end para que o utilizador saiba que o ficheiro foi utilizado 
       {setUploadFiles(false)};
     } catch (error) {
       alert('Error! Check if the file you want to upload is not already there!');
@@ -441,7 +457,7 @@ const handleDelete = async (fileName) => {
   const instance_delete = axios.create();
   instance_delete.interceptors.request.use(
     async (config) => {
-        const token = await localStorage.getItem('token'); 
+        const token = await localStorage.getItem('token'); //obtenção do token do utilizador para fazer o request 
         if (token) {
             config.headers.authorization = `Bearer ${token}`; 
         }
@@ -452,19 +468,19 @@ const handleDelete = async (fileName) => {
 
   try {
     const response = await instance_delete.post(
-      'https://hubo.pt:3001/delete_file',
+      'https://hubo.pt:3001/delete_file',     //request a api para apagar o ficheiro
       {
         id_group: group.id_group,
         file_name: fileName
       }
     );
-    alert("File successfully deleted!")
+    alert("File successfully deleted!") //alert box para o utilazor saber que o ficheiro foi apagado
     try {
       const response = await axios.post("https://hubo.pt:3001/files_list", { id_group: group.id_group }, {
         
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`, //atualização da lista de ficheiros apos a eliminação do ficheiro
         },
       });
   

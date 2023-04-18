@@ -47,13 +47,13 @@ const Index = () => (
       </section>
       <section className="home" id="home">
 
-        <div className="qr-code">
+        <div className="qr-code" href="https://hubo.pt:3001/download_apk" target="_blank">
           <img src="static/qr-code.png" alt="qr" style={{ marginLeft: '250px' }}/>
         </div>
 
         <div className="content">
           <h3>Get our Mobile App</h3>
-          <p>We recomend using the Mobile App to have the best of both worlds</p>
+          <p>We recomend using the Mobile App to have the best of both worlds. Click or scan the QR Code.</p>
         </div>
 
       </section>
