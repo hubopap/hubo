@@ -47,8 +47,8 @@ const Index = () => (
       </section>
       <section className="home" id="home">
 
-        <div className="qr-code" href="https://hubo.pt:3001/download_apk" target="_blank">
-          <img src="static/qr-code.png" alt="qr" style={{ marginLeft: '250px' }}/>
+        <div className="qr-code"  target="_blank">
+          <img src="static/qr-code.png" alt="qr" style={{ marginLeft: '250px' }} href="https://hubo.pt:3001/download_apk" />
         </div>
 
         <div className="content">
