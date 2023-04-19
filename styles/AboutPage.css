@@ -98,4 +98,17 @@
     height: 1.875rem;
   }
   
- 
+  @media only screen and (max-width: 1073px) {
+    .about .content h3 {
+      font-size: 2.0rem;
+      color: var(black);
+      line-height: 1.8;
+      text-shadow: var(text-shadow);
+    }
+    .about .content p {
+      font-size: 1.0rem;
+      color: var(light-color);
+      line-height: 1.8;
+      padding: 1rem 0;
+    }
+}
