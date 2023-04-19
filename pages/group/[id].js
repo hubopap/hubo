@@ -77,6 +77,23 @@ const isUserInGroup = async () => {
   }
 }
 
+const getTaskInfo = async () => {
+  const id_task_search_users = selectedTask.task.id_task;
+  const token = await getToken();
+  const response = await axios.post('https://hubo.pt:3001/task_owners', {
+    id_task: id_task_search_users
+  }, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  if(response.data.users_p2){
+    alert("User who can only complete:" + "\n" + response.data.users_p2.map(user => user.username).join(",\n") + "\n" + 
+      "\n" + "Users with Full Permission:" + "\n" + response.data.users_p3.map(user => user.username).join(",\n") + "\n")
+  }else if(!response.data.users_p2 && response.data.users_p3){
+    alert("Users with Full Permission:" + "\n" + "\n" + response.data.users_p3.map(user => user.username).join(",\n"))
+  }
+} 
+
 const handleCreateTask = async (e) => {
   e.preventDefault();
   const deadline_create = deadline + "T23:59:59.999Z";
@@ -118,7 +135,7 @@ const format_date = (date_string) => {
 }
 
 //editar tarefa
-const handleEditTaskPopUp= () =>{
+const handleEditTaskPopUp= () =>{info
   setOriginalDeadline(new Date(moment(selectedTask.task.deadline_task).format("YYYY-MM-DDT23:59:59.999[Z]")).toISOString().split('T')[0]);
   setEditDescTask(selectedTask.task.desc_task);
   setEditDeadline(new Date(moment(selectedTask.task.deadline_task).format("YYYY-MM-DDT23:59:59.999[Z]")).toISOString().split('T')[0]);
@@ -223,7 +240,9 @@ const TaskModal = ({ task }) => {
             >
               Close
             </button>
-           
+            <button style={{ cursor: "pointer" }} onClick={getTaskInfo}>
+              Info
+            </button>
             {selectedTask.permission == "2" && selectedTask.task.state_task != "2" && (
               <button onClick={setAsdoneTask}>Set as done</button>
             )}
