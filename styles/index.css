@@ -195,6 +195,9 @@ line-height: 2;
       font-size: 2rem;
       margin-top: 100px;
     }
+   
+
+    
   } 
 
   /*PAP*/
@@ -246,21 +249,19 @@ line-height: 2;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-  }
-  
-  .qr-code {
-    margin-bottom: 20px;
-
-  }
-
-  .home {
-    display: flex;
     justify-content: space-between;
     align-items: center;
   }
   
+  .home .qr-code img {
+    width: 14.5vw;
+    height: auto;
+  }
+  
   .qr-code {
+    margin-bottom: 20px;
     margin-left: 10px;
+
   }
   
   .contentqrcode {
