@@ -578,6 +578,46 @@ app.post("/task_info", authenticateToken, async (req, res) => {
 
 });
 
+
+//Função para ver propietários de tarefas
+app.post("/task_owners", authenticateToken, async (req, res) => {
+    const userId = req.user.userId;
+    const id_task = req.body.id_task;
+
+    try {
+        const set_as_done_users_ids = await UserTask.findAll({
+            where: {TaskIdTask: id_task, permission: "2"},
+            attributes: ["UserIdUser"]
+        });
+        const edit_and_delete_users_ids = await UserTask.findAll({
+            where: {TaskIdTask: id_task, permission: "3"},
+            attributes: ["UserIdUser"]
+        });
+        
+        const userIds_p2 = set_as_done_users_ids.map(user => user.UserIdUser);
+        const userIds_p3 = edit_and_delete_users_ids.map(user => user.UserIdUser);
+
+        const set_as_done_users = await User.findAll({
+            where: {id_user: userIds_p2},
+            attributes: ['username']
+        });
+
+        const edit_and_delete_users = await User.findAll({
+            where: {id_user: userIds_p3},
+            attributes: ['username']
+        });
+
+        if(!set_as_done_users || set_as_done_users.length == 0){
+            res.send({users_p3: edit_and_delete_users});
+        }else{
+            res.send({users_p2: set_as_done_users, users_p3: edit_and_delete_users});
+        }
+    } catch (error) {
+        res.status(500).send({ message: "Internal server error" });
+    }
+});
+
+
 //Função para alterar o estado de uma task
 app.post("/update_task_state", authenticateToken, async (req, res) => {
     const id_task = req.body.id_task;
