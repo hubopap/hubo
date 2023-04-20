@@ -135,7 +135,7 @@ const format_date = (date_string) => {
 }
 
 //editar tarefa
-const handleEditTaskPopUp= () =>{info
+const handleEditTaskPopUp = () =>{
   setOriginalDeadline(new Date(moment(selectedTask.task.deadline_task).format("YYYY-MM-DDT23:59:59.999[Z]")).toISOString().split('T')[0]);
   setEditDescTask(selectedTask.task.desc_task);
   setEditDeadline(new Date(moment(selectedTask.task.deadline_task).format("YYYY-MM-DDT23:59:59.999[Z]")).toISOString().split('T')[0]);
